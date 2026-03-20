@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://localhost:8000/self-introduce.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自我介绍 - 岳晓寒</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #f72585;
+            --text-primary: #2b2d42;
+            --text-secondary: #4a4e69;
+            --text-light: #8d99ae;
+            --background: #f8f9fa;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --border-radius: 24px;
+            --shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .intro-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 48px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 1000px;
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 48px;
+        }
+        
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .card-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .intro-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .card-header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .name {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        
+        .nickname {
+            font-size: 18px;
+            color: var(--primary-color);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+        
+        .tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.4);
+        }
+        
+        .profile-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 24px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            border: 4px solid white;
+        }
+        
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .header-info {
+            margin-bottom: 24px;
+        }
+        
+        .school-info {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .contact-info {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+        
+        .skill-container {
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .skill-name {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background: rgba(222, 226, 230, 0.5);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+        
+        .skill-level {
+            font-size: 12px;
+            color: var(--text-light);
+            text-align: right;
+        }
+        
+        .award-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .award-name {
+            font-size: 15px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .award-detail {
+            font-size: 14px;
+            color: var(--text-secondary);
+            padding-left: 12px;
+        }
+        
+        .practice-item,
+        .project-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .practice-name,
+        .project-name {
+            font-size: 15px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .practice-detail,
+        .project-detail {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .practice-detail li,
+        .project-detail li {
+            margin-left: 20px;
+        }
+        
+        .hobby-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        
+        .hobby-icon {
+            font-size: 20px;
+        }
+        
+        .hobby-name {
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+        
+        .non-tech-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .non-tech-skill {
+            background: rgba(222, 226, 230, 0.5);
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            border: 1px solid rgba(222, 226, 230, 0.8);
+        }
+        
+        .info-container {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        
+        .info-section {
+            background: rgba(248, 249, 250, 0.8);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(222, 226, 230, 0.5);
+        }
+        
+        .info-section:hover {
+            background: rgba(248, 249, 250, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+        
+        .info-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .info-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+        
+        .info-content {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        .info-content strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(222, 226, 230, 0.8);
+        }
+        
+        .footer-text {
+            font-size: 14px;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+        
+        @media (max-width: 480px) {
+            .intro-card {
+                padding: 32px;
+            }
+            
+            .name {
+                font-size: 28px;
+            }
+            
+            .profile-photo {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .info-section {
+                padding: 20px;
+            }
+            
+            .tags {
+                margin-bottom: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="intro-card">
+        <div class="card-content">
+            <div class="left-section">
+                <div class="profile-photo">
+                    <img src="./self-introduce_files/text_to_image" alt="岳晓寒">
+                </div>
+                <div class="name">岳晓寒</div>
+                <div class="nickname">晓寒</div>
+                <div class="header-info">
+                    <div class="school-info">电子科技大学成都学院软件工程专业 | 2024级本科</div>
+                    <div class="contact-info">QQ邮箱：2469177105@qq.com</div>
+                </div>
+                <div class="tags">
+                    <span class="tag">编程爱好者</span>
+                    <span class="tag">考研备考中</span>
+                </div>
+            </div>
+            
+            <div class="right-section">
+                <div class="info-section">
+                    <div class="info-title">核心学习能力</div>
+                    <div class="info-content">
+                        <strong>技术类：</strong>
+                        <div class="skill-container">
+                            <div class="skill-item">
+                                <div class="skill-name">Python</div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%;"></div>
+                                </div>
+                                <div class="skill-level">熟练</div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">SQL</div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 40%;"></div>
+                                </div>
+                                <div class="skill-level">了解</div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">HTML &amp; CSS</div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%;"></div>
+                                </div>
+                                <div class="skill-level">熟练</div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">Java</div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%;"></div>
+                                </div>
+                                <div class="skill-level">熟练</div>
+                            </div>
+                        </div>
+                        <br>
+                        <strong>非技术类：</strong>
+                        <div class="non-tech-skills">
+                            <span class="non-tech-skill">英语口语</span>
+                            <span class="non-tech-skill">PPT制作</span>
+                            <span class="non-tech-skill">文案写作</span>
+                            <span class="non-tech-skill">视频剪辑</span>
+                            <span class="non-tech-skill">数据分析</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-grid">
+                    <div class="info-section">
+                        <div class="info-title">在校实践</div>
+                        <div class="info-content">
+                            <div class="practice-item">
+                                <div class="practice-name">计算机学院导航分布干部（2024-2025）</div>
+                                <div class="practice-detail">
+                                    • 负责新生入学导航和学院活动组织<br>
+                                    • 策划并执行3场大型校园活动，参与人数超过500人<br>
+                                    • 协助学院老师完成日常管理工作，提高工作效率20%
+                                </div>
+                            </div>
+                            <br>
+                            <div class="practice-item">
+                                <div class="practice-name">校园项目：Python Web学生成绩管理系统</div>
+                                <div class="practice-detail">
+                                    • 负责后端开发，使用Flask框架和MySQL数据库<br>
+                                    • 实现学生信息管理、成绩录入和查询功能<br>
+                                    • 参与系统测试和优化，提高系统响应速度30%
+                                </div>
+                            </div>
+                            <br>
+                            <div class="practice-item">
+                                <div class="practice-name">软件工程课程助教（2025年春季）</div>
+                                <div class="practice-detail">
+                                    • 协助教授进行课程辅导和作业批改<br>
+                                    • 组织每周代码审查和技术分享会<br>
+                                    • 帮助100+学生解决编程问题，提高课程通过率15%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <div class="info-title">获奖成果</div>
+                        <div class="info-content">
+                            <div class="award-item">
+                                <div class="award-name">大学英语四级考试（CET-4）</div>
+                                <div class="award-detail">成绩：500+，2025年6月</div>
+                            </div>
+                            <br>
+                            <div class="award-item">
+                                <div class="award-name">校级三等奖学金</div>
+                                <div class="award-detail">2024-2025学年，表彰学业成绩优异</div>
+                            </div>
+                            <br>
+                            <div class="award-item">
+                                <div class="award-name">校级编程竞赛优秀奖</div>
+                                <div class="award-detail">2025年3月，Python应用开发方向</div>
+                            </div>
+                            <br>
+                            <div class="award-item">
+                                <div class="award-name">优秀学生干部</div>
+                                <div class="award-detail">2025年5月，计算机学院导航分布</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-title">项目成果</div>
+                    <div class="info-content">
+                        <div class="project-item">
+                            <div class="project-name">线上洗衣APP设计</div>
+                            <div class="project-detail">
+                                • 工具：Axure 9<br>
+                                • 负责完成"洗衣分类"交互页面设计<br>
+                                • 设计了直观的用户界面和流畅的交互流程<br>
+                                • 获得课程设计优秀作品奖
+                            </div>
+                        </div>
+                        <br>
+                        <div class="project-item">
+                            <div class="project-name">个人博客网站</div>
+                            <div class="project-detail">
+                                • 技术栈：HTML, CSS, JavaScript, Python Flask<br>
+                                • 实现了文章发布、评论和分类功能<br>
+                                • 响应式设计，适配移动端和桌面端<br>
+                                • 部署在云服务器上，访问量超过1000次
+                            </div>
+                        </div>
+                        <br>
+                        <div class="project-item">
+                            <div class="project-name">智能学习助手小程序</div>
+                            <div class="project-detail">
+                                • 技术栈：Python, OpenAI API<br>
+                                • 实现了学习计划制定、知识点梳理功能<br>
+                                • 利用AI技术提供个性化学习建议<br>
+                                • 团队项目，担任后端开发负责人
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-title">兴趣爱好</div>
+                    <div class="info-content">
+                        <div class="hobby-item">
+                            <span class="hobby-icon">🎹</span>
+                            <span class="hobby-name">音乐（钢琴十级）</span>
+                        </div>
+                        <div class="hobby-item">
+                            <span class="hobby-icon">💃</span>
+                            <span class="hobby-name">舞蹈</span>
+                        </div>
+                        <div class="hobby-item">
+                            <span class="hobby-icon">📷</span>
+                            <span class="hobby-name">摄影</span>
+                        </div>
+                        <div class="hobby-item">
+                            <span class="hobby-icon">📚</span>
+                            <span class="hobby-name">阅读</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-title">个人简介</div>
+                    <div class="info-content">
+                        我是岳晓寒，电子科技大学成都学院软件工程专业2024级本科生，一名充满热情的编程爱好者和考研备考者。
+                        <br><br>
+                        我对软件工程领域有着浓厚的兴趣，尤其擅长Python、Java、HTML和CSS等技术栈。在校期间，我积极参与各种实践活动，包括担任计算机学院导航分布干部、参与Python Web学生成绩管理系统开发，以及担任软件工程课程助教。
+                        <br><br>
+                        我不仅专注于技术学习，还注重综合素质的培养。通过参与校园活动和项目实践，我锻炼了团队协作能力、问题解决能力和领导力。同时，我也保持着广泛的兴趣爱好，如音乐（钢琴十级）、舞蹈、摄影和阅读，这些爱好丰富了我的生活，也培养了我的创造力和审美能力。
+                        <br><br>
+                        作为一名考研备考者，我正努力提升自己的专业知识和学术能力，目标是进入理想的研究生院继续深造。我相信"心有所期，全力以赴，定有所成"，并将以此为信念，不断追求卓越，努力成为一名优秀的软件工程师。
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-text">© 2026 岳晓寒</div>
+        </div>
+    </div>
+
+</body></html>
